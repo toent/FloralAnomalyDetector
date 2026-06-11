@@ -121,7 +121,7 @@ def coords_to_habitat(lat: float, lon: float) -> str | None:
     )
     url = WCS_URL.format(bbox=bbox)
 
-    response = requests.get(url, timeout=WCS_TIMEOUT)
+    response = requests.get(url, timeout=(3, 5))
     response.raise_for_status()
 
     with MemoryFile(io.BytesIO(response.content)) as memfile:

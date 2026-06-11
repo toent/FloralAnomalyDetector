@@ -4,8 +4,8 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
-from model_utils import check_entry
-from geo_utils import resolve_coordinates
+from api.model_utils import check_entry
+from api.geo_utils import resolve_coordinates
 
 MODEL_PATH = '/Floral-Anomaly-Detector.pkl'
 

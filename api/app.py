@@ -7,7 +7,7 @@ from pydantic import BaseModel
 from api.model_utils import check_entry
 from api.geo_utils import resolve_coordinates
 
-MODEL_PATH = '/Floral-Anomaly-Detector.pkl'
+MODEL_PATH = 'Floral-Anomaly-Detector.pkl'
 
 bundle = {}
 

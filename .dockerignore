@@ -1,0 +1,44 @@
+# flyctl launch added from .gitignore
+# Virtual environment
+**/.venv
+**/venv
+**/env
+
+# Python cache
+**/__pycache__
+**/*.py[cod]
+**/*.pyo
+
+# Jupyter checkpoints
+**/.ipynb_checkpoints
+
+# ESA tile cache, too large to commit
+**/esa_tiles
+
+# Keep the model pkl
+!**/Floral-Anomaly-Detector.pkl
+
+# VS Code
+**/.vscode
+
+# OS
+**/.DS_Store
+**/Thumbs.db
+
+# Logs
+**/*.log
+
+# flyctl launch added from .venv/.gitignore
+.venv/**/*
+
+# flyctl launch added from .venv/Lib/site-packages/debugpy/_vendored/pydevd/_pydevd_frame_eval/.gitignore
+.venv/Lib/site-packages/debugpy/_vendored/pydevd/_pydevd_frame_eval/pydevd_frame_evaluator.*.so
+.venv/Lib/site-packages/debugpy/_vendored/pydevd/_pydevd_frame_eval/pydevd_frame_evaluator.*.pyd
+.venv/Lib/site-packages/debugpy/_vendored/pydevd/_pydevd_frame_eval/pydevd_frame_evaluator.pyx
+
+# flyctl launch added from .venv/Lib/site-packages/debugpy/_vendored/pydevd/pydevd_attach_to_process/linux_and_mac/.gitignore
+.venv/Lib/site-packages/debugpy/_vendored/pydevd/pydevd_attach_to_process/linux_and_mac/attach_x86.dylib
+.venv/Lib/site-packages/debugpy/_vendored/pydevd/pydevd_attach_to_process/linux_and_mac/attach_x86_64.dylib
+.venv/Lib/site-packages/debugpy/_vendored/pydevd/pydevd_attach_to_process/linux_and_mac/attach_linux_x86.o
+.venv/Lib/site-packages/debugpy/_vendored/pydevd/pydevd_attach_to_process/linux_and_mac/attach_linux_x86_64.o
+fly.toml

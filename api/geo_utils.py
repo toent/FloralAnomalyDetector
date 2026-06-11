@@ -1,13 +1,13 @@
-import os
-import urllib.request
+import io
 
 import numpy as np
 import pycountry
+import requests
 import reverse_geocoder as rg
 
 try:
     import rasterio
-    from rasterio.transform import rowcol
+    from rasterio.io import MemoryFile
     RASTERIO_AVAILABLE = True
 except ImportError:
     RASTERIO_AVAILABLE = False
@@ -15,7 +15,7 @@ except ImportError:
 
 # ESA WorldCover 2021 land cover class codes mapped to the habitat vocabulary
 # used in the flora dataset. Where a class has no clean equivalent (cropland,
-# built-up) it maps to None, which the caller can handle as unknown.
+# built-up) it maps to None, which the caller handles as unknown.
 ESA_TO_HABITAT = {
     10:  'forest',      # Tree cover
     20:  'shrubland',   # Shrubland
@@ -62,36 +62,24 @@ ISO2_OVERRIDES = {
     'VN': 'Vietnam',
 }
 
-# WorldCover tiles are downloaded on demand and cached in this directory.
-TILE_CACHE_DIR = os.environ.get('ESA_TILE_CACHE', './esa_tiles')
-
-# ESA WorldCover 2021 tile URL template. Tiles are 3x3 degree cells named by
-# their south-west corner, e.g. N51E000 for the tile covering 51-54N, 0-3E.
-ESA_TILE_URL = (
-    'https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/'
-    'ESA_WorldCover_10m_2021_v200_{tile}_Map.tif'
+# Terrascope WCS endpoint for ESA WorldCover 2021.
+# Returns a tiny single-pixel GeoTIFF for the requested bounding box.
+# No tile storage needed, no large downloads.
+WCS_URL = (
+    "https://services.terrascope.be/wcs/v2"
+    "?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage"
+    "&COVERAGEID=WORLDCOVER_2021_MAP"
+    "&BBOX={bbox}"
+    "&CRS=EPSG:4326&RESPONSE_CRS=EPSG:4326"
+    "&FORMAT=image/tiff"
 )
 
+# Size of the bounding box around the coordinate in degrees.
+# 0.00005 degrees is about 5 metres, giving a single pixel at 10m resolution.
+BBOX_DELTA = 0.00005
 
-def _tile_name(lat: float, lon: float) -> str:
-    """Return the ESA WorldCover tile name covering a given coordinate."""
-    lat_floor = int(np.floor(lat / 3)) * 3
-    lon_floor = int(np.floor(lon / 3)) * 3
-    lat_str = f"{'N' if lat_floor >= 0 else 'S'}{abs(lat_floor):02d}"
-    lon_str = f"{'E' if lon_floor >= 0 else 'W'}{abs(lon_floor):03d}"
-    return f"{lat_str}{lon_str}"
-
-
-def _get_tile_path(tile_name: str) -> str:
-    """Return local path to a cached ESA tile, downloading it if necessary."""
-    os.makedirs(TILE_CACHE_DIR, exist_ok=True)
-    path = os.path.join(TILE_CACHE_DIR, f"{tile_name}.tif")
-    if not os.path.exists(path):
-        url = ESA_TILE_URL.format(tile=tile_name)
-        print(f"Downloading ESA tile {tile_name} from {url} ...")
-        urllib.request.urlretrieve(url, path)
-        print(f"Saved to {path}")
-    return path
+# Request timeout in seconds. Terrascope usually responds in under 2 seconds.
+WCS_TIMEOUT = 10
 
 
 def coords_to_country(lat: float, lon: float) -> str | None:
@@ -117,10 +105,9 @@ def coords_to_country(lat: float, lon: float) -> str | None:
 
 def coords_to_habitat(lat: float, lon: float) -> str | None:
     """
-    Resolve a coordinate pair to a habitat string using ESA WorldCover 2021.
-    Downloads and caches the relevant tile on first use.
-    Returns None if rasterio is unavailable, the tile cannot be fetched,
-    or the ESA class has no habitat equivalent (cropland, built-up).
+    Resolve a coordinate pair to a habitat string using the Terrascope WCS API.
+    Fetches a single-pixel GeoTIFF into memory, no tile storage required.
+    Returns None if the request fails or the ESA class has no habitat equivalent.
     """
     if not RASTERIO_AVAILABLE:
         raise RuntimeError(
@@ -128,20 +115,21 @@ def coords_to_habitat(lat: float, lon: float) -> str | None:
             'Install it with: pip install rasterio'
         )
 
-    tile_name = _tile_name(lat, lon)
+    bbox = (
+        f"{lon - BBOX_DELTA},{lat - BBOX_DELTA},"
+        f"{lon + BBOX_DELTA},{lat + BBOX_DELTA}"
+    )
+    url = WCS_URL.format(bbox=bbox)
 
-    try:
-        tile_path = _get_tile_path(tile_name)
-    except Exception as e:
-        raise RuntimeError(f"Could not fetch ESA tile {tile_name}: {e}") from e
+    response = requests.get(url, timeout=WCS_TIMEOUT)
+    response.raise_for_status()
 
-    with rasterio.open(tile_path) as src:
-        row, col = rowcol(src.transform, lon, lat)
-        window = rasterio.windows.Window(col, row, 1, 1)
-        data = src.read(1, window=window)
-        esa_class = int(data[0, 0])
+    with MemoryFile(io.BytesIO(response.content)) as memfile:
+        with memfile.open() as dataset:
+            data = dataset.read(1)
+            esa_class = int(data.flat[0])
 
-    return ESA_TO_HABITAT.get(esa_class)
+    return ESA_TO_HABITAT.get(esa_class), esa_class
 
 
 def resolve_coordinates(lat: float, lon: float) -> dict:
@@ -153,17 +141,10 @@ def resolve_coordinates(lat: float, lon: float) -> dict:
     country = coords_to_country(lat, lon)
 
     try:
-        tile_name = _tile_name(lat, lon)
-        tile_path = _get_tile_path(tile_name)
-        with rasterio.open(tile_path) as src:
-            row, col = rowcol(src.transform, lon, lat)
-            window = rasterio.windows.Window(col, row, 1, 1)
-            data = src.read(1, window=window)
-            esa_class = int(data[0, 0])
-        habitat = ESA_TO_HABITAT.get(esa_class)
+        habitat, esa_class = coords_to_habitat(lat, lon)
     except Exception:
-        esa_class = None
         habitat = None
+        esa_class = None
 
     return {
         'country':   country,

@@ -7,3 +7,4 @@ pydantic
 rasterio
 reverse_geocoder
 pycountry
+requests

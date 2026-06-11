@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pandas
+numpy
+scikit-learn
+pydantic
+rasterio
+reverse_geocoder
+pycountry

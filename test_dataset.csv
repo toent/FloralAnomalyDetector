@@ -1,0 +1,101 @@
+scientific_name,common_name,country,habitat,label,suspicious_reason
+Aechmea victoriana,,Brazil,forest,real,
+Chrysalidocarpus ankirindro,,Madagascar,mountains,real,
+Echinacea sanguinea,sanguin purple coneflower,United States,grasslands,real,
+Ardisia blatteri,,Latvia,forest,fake,Forest species in Latvia (no forest entries)
+Rhododendron serrulatum,,United States,water,real,
+Babiana lineolata,,South Africa,water,real,
+Cactus opuntia,Prickly pear,Ireland,desert,fake,Made-up cactus species in Ireland desert
+Yucca ×schottii,Schott's yucca,Mexico,desert,real,
+Cyperus ligularis,Alabama swamp flatsedge,Jamaica,water,real,
+Heptapleurum bourdillonii,,Bangladesh,mountains,fake,Mountain plant in flat Bangladesh
+Mischocarpus pyriformis,,Jordan,water,fake,Water plant in Jordan (no water entries)
+Nicotiana clevelandii,,Iceland,desert,fake,Desert plant in Iceland
+Sphagnum novocaledoniae,,New Caledonia,water,real,
+Stylidium rotundifolium,,Australia,forest,real,
+Lepismium warmingianum,,Paraguay,forest,real,
+Attalea princeps,,Brazil,forest,real,
+Murbeckiella sousae,,Portugal,mountains,real,
+Lasthenia minor,coastal goldfields,United States,grasslands,real,
+Keckiella ternata,scarlet keckiella,United States,mountains,real,
+Symphyotrichum lanceolatum,white panicle aster,Canada,grasslands,real,
+Diuris jonesii,,Uzbekistan,coastal,fake,Coastal species in landlocked Uzbekistan
+Lotus maroccanus,,Morocco,coastal,real,
+Claytonia perfoliata,miner's lettuce,Mexico,mountains,real,
+Carex mucronata,,France,mountains,real,
+Psychotria carthagenensis,,Brazil,forest,real,
+Sahara deserticola,,Sweden,desert,fake,Fictional desert species in Sweden
+Agathis macrophylla,Kauri,Vanuatu,mountains,real,
+Sciodaphyllum acuminatum,,Peru,mountains,real,
+Stephanomeria cichoriacea,,Denmark,mountains,fake,Mountain plant in flat Denmark
+Allium atrosanguineum var. fedschenkoanum,,Kyrgyzstan,mountains,real,
+Malesherbia turbinea,,Peru,water,real,
+Eupatorium leptophyllum,false fennel,United States,water,real,
+Banksia foliolata,,Australia,shrubland,real,
+Tabernaemontana rostrata,,Bangladesh,forest,real,
+Ribes bracteosum,,Bhutan,coastal,fake,Coastal plant in landlocked Bhutan
+Lithospermum molle,,United States,grasslands,real,
+Baloghia marmorata,,Greenland,forest,fake,Tropical forest species in Greenland
+Wyethia longicaulis,,Maldives,grasslands,fake,Grassland species in Maldives
+Cinchona officinalis,quinine,Peru,mountains,real,
+Clintonia udensis,,China,mountains,real,
+Dudleya virens,bright green dudleya,Mexico,coastal,real,
+Babiana namaquensis,,Namibia,desert,real,
+Stylidium prophyllum,,Maldives,water,fake,Water plant in Maldives (no water entries)
+Cistus monspeliensis,Montpelier cistus,Malta,forest,real,
+Erica aestiva,,Kosovo,shrubland,fake,Shrubland species in Kosovo (no shrubland entries)
+Araucarioxylon arizonicum,,Scotland,desert,fake,Desert plant in Scotland
+Commiphora wightii,,Pakistan,desert,real,
+Lobelia aberdarica,,Kenya,grasslands,real,
+Podocarpus globulus,,Malaysia,mountains,real,
+Tropicalis borealis,,Greenland,forest,fake,Fictional tropical species in Greenland forest
+Ourisia muscosa,,Chile,mountains,real,
+Myrcia floridissima,,Brazil,forest,real,
+Xanthorrhoea thorntonii,,Australia,desert,real,
+Leucopogon diversifolius,,Egypt,shrubland,fake,Shrubland species in Egypt (no shrubland entries)
+Mangrovia alpinus,,Switzerland,coastal,fake,Fictional mangrove species in landlocked Switzerland
+Sabal mauritiiformis,,Panama,grasslands,real,
+Carex alba,,Romania,forest,real,
+Lupinus formosus,,Iceland,grasslands,fake,Grassland species in Iceland (no grassland entries)
+Salvia eremostachya,,Japan,desert,fake,Desert plant in Japan
+Tetradenia riparia,Ginger Bush,South Africa,water,real,
+Symphoricarpos longiflorus,,Norway,desert,fake,Desert plant in Norway
+Genista canariensis,,Switzerland,coastal,fake,Coastal plant in landlocked Switzerland
+Erica irrorata,,South Africa,shrubland,real,
+Diospyros dictyoneura,,Iceland,forest,fake,Forest species in Iceland (no forest entries)
+Roscoea bhutanica,,China,mountains,real,
+Isoëtes melanospora,blackspore quillwort,United States,water,real,
+Euphorbia candelabrum,Candelabra tree,Eritrea,grasslands,real,
+Styphelia filamentosa,,Australia,shrubland,real,
+Araucaria scopulorum,,New Caledonia,coastal,real,
+Nepenthes pervillei,Pitcher plant,Seychelles,mountains,real,
+Tephrocactus bonnieae,,Argentina,desert,real,
+Critonia portoricensis,Puerto Rico thoroughwort,United States,forest,real,
+Dimorphotheca sinuata,,Vietnam,desert,fake,Desert species in tropical Vietnam
+Macledium zeyheri,,Mozambique,shrubland,real,
+Jasminum didymum,,Niue,desert,real,
+Sporobolus compositus,composite dropseed,Canada,grasslands,real,
+Miscanthus nepalensis,,China,mountains,real,
+Akebia quinata,,Netherlands,mountains,fake,Mountain plant in flat Netherlands
+Spermacoce remota,,United States,forest,real,
+Taverniera aegyptiaca,,Finland,desert,fake,Desert plant in Finland
+Physaria thamnophila,,Myanmar,desert,fake,Desert species in tropical Myanmar
+Ptychomnion aciculare,,Australia,mountains,real,
+Echinopsis pachanoi,San Pedro Cactus,Peru,mountains,real,
+Liparis condylobulbon,Tapered sphinx orchid,Vanuatu,forest,real,
+Parthenium argentatum,guayule,Mexico,desert,real,
+Geoffroea decorticans,chañar,Bolivia,desert,real,
+Hernandia didymantha,,Honduras,mountains,real,
+Iphigenia socotrana,,Yemen,shrubland,real,
+Hypericum gnidiifolium,,Albania,water,fake,Water species in Albania (no water entries in dataset)
+Kayea ferruginea,,Cambodia,water,real,
+Erica laeta,,Mali,shrubland,fake,Shrubland species in Mali (no shrubland entries)
+Ranunculus acris,meadow buttercup,United States,grasslands,real,
+Robiquetia wassellii,Green pouched orchid,Australia,forest,real,
+Pseuduvaria glabrescens,,Australia,coastal,real,
+Astragalus tragacantha,,Mongolia,coastal,fake,Coastal plant in landlocked Mongolia
+Sporobolus flexuosus,,Russia,desert,fake,Desert plant in Russia (no desert entries)
+Musgravea stenostachya,,Australia,forest,real,
+Cirsium japonicum var. japonicum,,China,mountains,real,
+Callichilia barteri,,Togo,forest,real,
+Cassytha filiformis,devil's gut,Mexico,forest,real,
